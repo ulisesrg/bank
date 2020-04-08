@@ -1,15 +1,42 @@
-@import "./Vars.scss";
-@import "./Media.scss";
+@import './Vars.scss';
+@import './Media.scss';
 
 body {
   margin: 0;
   font-family: $theme-font;
-  background: $main-color;
+  // background: $main-color;
 }
 
 * {
   // box-sizing: border-box;
 }
+
+table {
+  border-collapse: collapse;
+}
+
+th, td {
+  text-align: center;
+  border: 1px solid black;
+}
+
+.centered {
+  text-align: center;
+}
+
+.title {
+  color: #868686;
+}
+
+.main {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: flex-start;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
 
 .button {
   background-color: rgba(255, 255, 255, 0.3);
@@ -23,4 +50,24 @@ body {
   height: 50px;
   letter-spacing: 1px;
   margin: 10px 0px;
+}
+
+.card {
+  width: 320px;
+  padding: 3px;
+  margin: 1em;
+  border: 1px solid #c0c0c0;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+}
+
+.card__placeholder {
+  width: 320px;
+  height: 200px;
+  background: #e0e0e0;
+}
+
+.card__body {
+  margin: 0.5em;
 }

@@ -13,31 +13,7 @@ const Transfer = ({ myList, trends, originals }) => {
   return (
     <>
       <Header2 isTransfer />
-      <h1>Transfer</h1>
-      <Search isHome />
-      {myList.length > 0 && (
-        <Categories title='Mi Lista'>
-          <Carousel>
-            {myList.map((item) => (
-              <CarouselItem key={item.id} {...item} isList />
-            ))}
-          </Carousel>
-        </Categories>
-      )}
-      <Categories title='Tendencias'>
-        <Carousel>
-          {trends.map((item) => (
-            <CarouselItem key={item.id} {...item} />
-          ))}
-        </Carousel>
-      </Categories>
-      <Categories title='Originales de Platzi Video'>
-        <Carousel>
-          {originals.map((item) => (
-            <CarouselItem key={item.id} {...item} />
-          ))}
-        </Carousel>
-      </Categories>
+      <h1>Welcome to your online banking</h1>
     </>
   );
 };
