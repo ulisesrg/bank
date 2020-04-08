@@ -12,7 +12,7 @@ import '../assets/styles/App.scss';
 const Home2 = ({ myList, trends, originals }) => {
   return (
     <>
-      <Header2 />
+      <Header2 isHome />
       <h1>Home 2</h1>
       <Search isHome />
       {myList.length > 0 && (

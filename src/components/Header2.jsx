@@ -10,16 +10,15 @@ import logo from '../assets/static/logo-platzi-video-BW2.png';
 import userIcon from '../assets/static/user-icon.png';
 
 const Header2 = (props) => {
-  const { user, isLogin, isRegister } = props;
+  const { user, isHome, isTransfer } = props;
   const hasUser = Object.keys(user).length > 0;
 
   const handleLogout = () => {
     props.logoutRequest({});
   };
-  const headerClass = classNames('header', {
-    isLogin,
-    isRegister,
-  });
+  const isHomeActive = isHome ? 'isActive' : null;
+  const isTransferActive = isTransfer ? 'isActive' : null;
+
   return (
     <header className='header'>
       <nav className='header-nav'>
@@ -28,10 +27,14 @@ const Header2 = (props) => {
             <Link to='#'>Company</Link>
           </li>
           <li>
-            <Link to='/home2'>Home2</Link>
+            <Link className={isHomeActive} to='/home2'>
+              Home2
+            </Link>
           </li>
           <li>
-            <Link to='/transfer'>Transfer</Link>
+            <Link className={isTransferActive} to='/transfer'>
+              Transfer
+            </Link>
           </li>
         </ul>
         <Link to='/log-in2'>Log Out</Link>

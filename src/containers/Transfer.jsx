@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
-import Header from '../components/Header';
+// import Header from '../components/Header';
+import Header2 from '../components/Header2';
 import Search from '../components/Search';
 import Categories from '../components/Categories';
 import Carousel from '../components/Carousel';
@@ -11,7 +12,7 @@ import '../assets/styles/App.scss';
 const Transfer = ({ myList, trends, originals }) => {
   return (
     <>
-      <Header />
+      <Header2 isTransfer />
       <h1>Transfer</h1>
       <Search isHome />
       {myList.length > 0 && (
