@@ -64,17 +64,13 @@ select {
 }
 
 .button {
-  background-color: rgba(255, 255, 255, 0.3);
-  border: none;
-  border-radius: 25px;
-  color: white;
-  cursor: pointer;
-  font-size: 16px;
-  font-weight: bold;
-  font-family: 'Muli', sans-serif;
-  height: 50px;
-  letter-spacing: 1px;
-  margin: 10px 0px;
+  display: block;
+  font-size: 1rem;
+  padding: 0.5em 2em;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  background-color: #7ed3e4;
 }
 
 .card {
@@ -115,4 +111,29 @@ select {
 .transactions .transactions__table th, 
 .transactions .transactions__table td {
   padding: 0.4em 0;
+}
+
+.login {
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.login__card {
+  width: 80%;
+  max-width: 500px;
+  border: 1px solid black;
+  -webkit-border-radius: 25px;
+  -moz-border-radius: 25px;
+  border-radius: 25px;
+  margin-bottom: 5em;
+}
+
+.login__card form {
+  max-width: 500px;
+  margin: 0 10% 10%;
+}
+
+.login__card form .button{
+  margin: 2em auto 0;
 }
