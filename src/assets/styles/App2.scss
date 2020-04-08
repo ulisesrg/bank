@@ -20,23 +20,48 @@ th, td {
   border: 1px solid black;
 }
 
+label {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1em;
+  color: #7e7e7e;
+}
+
+input, select {
+  font-size: 1rem;
+  height: 2em;
+  padding: 0 0.3em;
+  border: 1px solid #c0c0c0;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  margin: 0.2em 0;
+}
+
+select {
+  box-sizing: content-box;
+  background: #ffffff;
+}
+
 .centered {
   text-align: center;
 }
 
 .title {
-  color: #868686;
+  color: #b3b3b3;
 }
 
 .main {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
   align-items: flex-start;
   max-width: 1100px;
-  margin: 0 auto;
+  margin: 0 5%;
 }
 
+.home {
+  justify-content: center;
+}
 
 .button {
   background-color: rgba(255, 255, 255, 0.3);
@@ -70,4 +95,24 @@ th, td {
 
 .card__body {
   margin: 0.5em;
+}
+
+.transfer {
+  justify-content: space-around;
+  margin-top: 3em;
+}
+
+.transactions {
+  width: 100%;
+  margin: 3em 10%;
+}
+
+.transactions .transactions__table {
+  width: 100%;
+  margin-bottom: 1.5em;
+}
+
+.transactions .transactions__table th, 
+.transactions .transactions__table td {
+  padding: 0.4em 0;
 }

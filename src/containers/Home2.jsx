@@ -15,7 +15,7 @@ const Home2 = ({ myList, trends, originals }) => {
     <>
       <Header2 isHome />
       <h1 className='title centered'>Welcome to your online banking</h1>
-      <main className='main'>
+      <main className='main home'>
         <section className='card'>
           <div className='card__placeholder' />
           <div className='card__body'>
