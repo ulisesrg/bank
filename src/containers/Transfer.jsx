@@ -44,6 +44,14 @@ const Transfer = ({ myList, trends, originals }) => {
                   pattern='[0-9]*'
                 />
               </label>
+              <div className='buttons'>
+                <button className='button button--transfer' type='button'>
+                  Transfer
+                </button>
+                <button className='button button--cancel' type='button'>
+                  Cancel
+                </button>
+              </div>
             </form>
           </div>
         </section>
