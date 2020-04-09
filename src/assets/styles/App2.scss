@@ -59,10 +59,6 @@ select {
   margin: 0 5%;
 }
 
-.home {
-  justify-content: center;
-}
-
 .button {
   display: block;
   font-size: 1rem;
@@ -71,26 +67,6 @@ select {
   -moz-border-radius: 5px;
   border-radius: 5px;
   background-color: #7ed3e4;
-}
-
-.card {
-  width: 320px;
-  padding: 3px;
-  margin: 1em;
-  border: 1px solid #c0c0c0;
-  -webkit-border-radius: 5px;
-  -moz-border-radius: 5px;
-  border-radius: 5px;
-}
-
-.card__placeholder {
-  width: 320px;
-  height: 200px;
-  background: #e0e0e0;
-}
-
-.card__body {
-  margin: 0.5em;
 }
 
 .transfer {
