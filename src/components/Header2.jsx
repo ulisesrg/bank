@@ -11,11 +11,11 @@ import userIcon from '../assets/static/user-icon.png';
 
 const Header2 = (props) => {
   const { user, isHome, isTransfer } = props;
-  const hasUser = Object.keys(user).length > 0;
+  // const hasUser = Object.keys(user).length > 0;
 
-  const handleLogout = () => {
-    props.logoutRequest({});
-  };
+  // const handleLogout = () => {
+  //   props.logoutRequest({});
+  // };
   const isHomeActive = isHome ? 'isActive' : null;
   const isTransferActive = isTransfer ? 'isActive' : null;
 
@@ -43,14 +43,15 @@ const Header2 = (props) => {
   );
 };
 
-const mapStateToProps = (state) => {
-  return {
-    user: state.user,
-  };
-};
+// const mapStateToProps = (state) => {
+//   return {
+//     user: state.user,
+//   };
+// };
 
-const mapDispatchToProps = {
-  logoutRequest,
-};
+// const mapDispatchToProps = {
+//   logoutRequest,
+// };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Header2);
+// export default connect(mapStateToProps, mapDispatchToProps)(Header2);
+export default Header2;

@@ -1,6 +1,7 @@
 import React from 'react';
+import { connect } from 'react-redux';
 
-const BalanceTable = () => (
+const BalanceTable = ({ balance }) => (
   <table>
     <thead>
       <tr>
@@ -10,18 +11,22 @@ const BalanceTable = () => (
       </tr>
     </thead>
     <tbody>
-      <tr>
-        <td>****1234</td>
-        <td>$400.00</td>
-        <td>21/May/19</td>
-      </tr>
-      <tr>
-        <td>****5678</td>
-        <td>€30.00</td>
-        <td>10/Apr/19</td>
-      </tr>
+      {balance.map((item) => (
+        <tr>
+          <td>{item.account}</td>
+          <td>{`${item.balance.currency}${item.balance.value}`}</td>
+          <td>{item.createdAt}</td>
+        </tr>
+      ))}
     </tbody>
   </table>
 );
 
-export default BalanceTable;
+// export default BalanceTable;
+const mapStateToProps = (state) => {
+  return {
+    balance: state.balance,
+  };
+};
+
+export default connect(mapStateToProps, null)(BalanceTable);
