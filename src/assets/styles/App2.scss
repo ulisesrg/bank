@@ -69,44 +69,6 @@ select {
   background-color: #7ed3e4;
 }
 
-.transfer {
-  justify-content: space-around;
-  margin-top: 3em;
-}
-
-.transfer .buttons {
-  display: flex;
-  justify-content: flex-end;
-}
-
-.button--transfer {
-  margin-left: auto;
-  color: #ffffff;
-  background-color: #2777df;
-}
-
-.button--cancel {
-  margin-left: 0.6em;
-  background-color: #ffffff;
-}
-
-.transactions {
-  width: 100%;
-  margin: 3em 10%;
-}
-
-.transactions .transactions__table {
-  width: 100%;
-  margin-bottom: 1.5em;
-}
-
-.transactions .transactions__table th, 
-.transactions .transactions__table td {
-  padding: 0.4em 0;
-}
-
-
-
 .login {
   justify-content: center;
   align-items: center;

@@ -1,0 +1,9 @@
+.transfer {
+  justify-content: space-around;
+  margin-top: 3em;
+}
+
+.transfer .card h2 {
+  text-align: center;
+  color: #b3b3b3;
+}

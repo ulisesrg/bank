@@ -1,0 +1,15 @@
+.newTransfer .buttons {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.newTransfer .button--transfer {
+  margin-left: auto;
+  color: #ffffff;
+  background-color: #2777df;
+}
+
+.newTransfer .button--cancel {
+  margin-left: 0.6em;
+  background-color: #ffffff;
+}

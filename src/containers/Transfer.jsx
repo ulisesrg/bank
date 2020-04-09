@@ -2,110 +2,45 @@ import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 // import Header from '../components/Header';
 import Header2 from '../components/Header2';
+import MainContainer from '../components/MainContainer';
+import Card from '../components/Card';
+import CardGraphic from '../components/CardGraphic';
+import CardBody from '../components/CardBody';
+import NewTransfer from '../components/NewTransfer';
+import Transactions from '../components/Transactions';
+import TransactionsTable from '../components/TransactionsTable';
 import Search from '../components/Search';
 import Categories from '../components/Categories';
 import Carousel from '../components/Carousel';
 import CarouselItem from '../components/CarouselItem';
 import useInitialState from '../hooks/useInitialState';
 import '../assets/styles/App.scss';
+import '../assets/styles/components/Transfer.css';
 
 const Transfer = ({ myList, trends, originals }) => {
   return (
     <>
       <Header2 isTransfer />
-      <main className='main transfer'>
-        <section className='card'>
-          <div className='card__body'>
-            <h2 className='title centered'>Create new transfer</h2>
-            <form action=''>
-              <label htmlFor='origin'>
-                Select origin account
-                <select name='origin' id='origin'>
-                  <option value=''>Select an origin account</option>
-                  <option value=''>****1234 - $100.00</option>
-                  <option value=''>****5678 - $€30.00</option>
-                </select>
-              </label>
-              <label htmlFor='destination'>
-                Destination account
-                <input
-                  id='destination'
-                  type='text'
-                  inputMode='numeric'
-                  pattern='[0-9]*'
-                />
-              </label>
-              <label htmlFor='amount'>
-                Amount
-                <input
-                  id='amount'
-                  type='text'
-                  inputMode='numeric'
-                  pattern='[0-9]*'
-                />
-              </label>
-              <div className='buttons'>
-                <button className='button button--transfer' type='button'>
-                  Transfer
-                </button>
-                <button className='button button--cancel' type='button'>
-                  Cancel
-                </button>
-              </div>
-            </form>
-          </div>
-        </section>
+      <MainContainer section='transfer'>
+        <Card>
+          <CardBody title='Create new transfer'>
+            <NewTransfer />
+          </CardBody>
+        </Card>
 
         <div>
-          <div className='card'>
-            <div className='card__placeholder'></div>
-          </div>
+          <Card>
+            <CardGraphic>
+              <div className='card__placeholder' />
+            </CardGraphic>
+          </Card>
         </div>
 
-        <section className='transactions'>
-          <table className='transactions__table'>
-            <thead>
-              <th>Origin account</th>
-              <th>Destination account</th>
-              <th>Transfer date</th>
-              <th>Amount</th>
-            </thead>
-            <tr>
-              <td>****1234</td>
-              <td>12345678</td>
-              <td>01/May/19</td>
-              <td>$1400</td>
-            </tr>
-            <tr>
-              <td>****1234</td>
-              <td>12345678</td>
-              <td>21/Jun/19</td>
-              <td>$1500</td>
-            </tr>
-          </table>
-
-          <table className='transactions__table'>
-            <thead>
-              <th>Origin account</th>
-              <th>Destination account</th>
-              <th>Transfer date</th>
-              <th>Amount</th>
-            </thead>
-            <tr>
-              <td>****1234</td>
-              <td>12345678</td>
-              <td>01/May/19</td>
-              <td>$1400</td>
-            </tr>
-            <tr>
-              <td>****1234</td>
-              <td>12345678</td>
-              <td>21/Jun/19</td>
-              <td>$1500</td>
-            </tr>
-          </table>
-        </section>
-      </main>
+        <Transactions>
+          <TransactionsTable />
+          <TransactionsTable />
+        </Transactions>
+      </MainContainer>
     </>
   );
 };

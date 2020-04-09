@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import Header2 from '../components/Header2';
 import MainContainer from '../components/MainContainer';
 import Card from '../components/Card';
+import CardGraphic from '../components/CardGraphic';
 import CardBody from '../components/CardBody';
 import BalanceTable from '../components/BalanceTable';
 import Search from '../components/Search';
@@ -14,7 +15,6 @@ import useInitialState from '../hooks/useInitialState';
 // import '../assets/styles/App.scss';
 import '../assets/styles/App2.scss';
 import '../assets/styles/components/Home.css';
-import CardGraphic from '../components/CardGraphic';
 
 const Home2 = ({ myList, trends, originals }) => {
   return (
