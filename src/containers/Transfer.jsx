@@ -17,7 +17,12 @@ import useInitialState from '../hooks/useInitialState';
 import '../assets/styles/App.scss';
 import '../assets/styles/components/Transfer.css';
 
-const Transfer = ({ myList, trends, originals }) => {
+const Transfer = ({ transactions, balance }) => {
+  // const originAccounts = transactions.map((item) => item.fromAccount);
+  const uniqueOriginAccounts = [
+    ...new Set(transactions.map(item => item.fromAccount)),
+  ];
+  // console.log(uniqueOriginAccounts);
   return (
     <>
       <Header2 isTransfer />
@@ -37,8 +42,11 @@ const Transfer = ({ myList, trends, originals }) => {
         </div>
 
         <Transactions>
-          <TransactionsTable />
-          <TransactionsTable />
+          {uniqueOriginAccounts.map((item) => (
+            <TransactionsTable key={item} origin={item} />
+          ))}
+          {/* <TransactionsTable />
+          <TransactionsTable /> */}
         </Transactions>
       </MainContainer>
     </>
@@ -47,9 +55,8 @@ const Transfer = ({ myList, trends, originals }) => {
 
 const mapStateToProps = (state) => {
   return {
-    myList: state.myList,
-    trends: state.trends,
-    originals: state.originals,
+    transactions: state.transactions,
+    balance: state.balance,
   };
 };
 
