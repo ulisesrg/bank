@@ -17,11 +17,11 @@ import useInitialState from '../hooks/useInitialState';
 import '../assets/styles/App.scss';
 import '../assets/styles/components/Transfer.css';
 
-const Transfer = ({ transactions, balance }) => {
+const Transfer = ({ balance }) => {
   // const originAccounts = transactions.map((item) => item.fromAccount);
-  const uniqueOriginAccounts = [
-    ...new Set(transactions.map(item => item.fromAccount)),
-  ];
+  // const uniqueOriginAccounts = [
+  //   ...new Set(transactions.map((item) => item.fromAccount)),
+  // ];
   // console.log(uniqueOriginAccounts);
   return (
     <>
@@ -42,9 +42,12 @@ const Transfer = ({ transactions, balance }) => {
         </div>
 
         <Transactions>
-          {uniqueOriginAccounts.map((item) => (
-            <TransactionsTable key={item} origin={item} />
+          {balance.map((item) => (
+            <TransactionsTable key={item.account} origin={item.account} />
           ))}
+          {/* {uniqueOriginAccounts.map((item) => (
+            <TransactionsTable key={item} origin={item} />
+          ))} */}
           {/* <TransactionsTable />
           <TransactionsTable /> */}
         </Transactions>
