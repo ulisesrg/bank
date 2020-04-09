@@ -9,6 +9,9 @@ const MainContainer = ({ children, section, title }) => {
     case 'transfer':
       sectionClass = 'transfer';
       break;
+    case 'login':
+      sectionClass = 'login';
+      break;
     default:
       sectionClass = null;
   }

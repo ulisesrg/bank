@@ -4,7 +4,10 @@ import { Link } from 'react-router-dom';
 import { loginRequest } from '../actions';
 // import Header from '../components/Header';
 import Header2 from '../components/Header2';
+import MainContainer from '../components/MainContainer';
+import LoginCard from '../components/LoginCard';
 import '../assets/styles/components/Login.scss';
+import '../assets/styles/components/Login.css';
 import googleIcon from '../assets/static/google-icon.png';
 import twitterIcon from '../assets/static/twitter-icon.png';
 
@@ -29,22 +32,9 @@ const Login2 = (props) => {
   return (
     <>
       <Header2 isLogin />
-      <main className='main login'>
-        <div className='login__card'>
-          <h1 className='centered'>Login</h1>
-          <form action=''>
-            <label htmlFor='username'>
-              Username
-              <input id='username' type='text' />
-            </label>
-            <label htmlFor='password'>
-              Password
-              <input id='password' type='password' />
-            </label>
-            <button className='button' type='button'>Enter</button>
-          </form>
-        </div>
-      </main>
+      <MainContainer section='login'>
+        <LoginCard />
+      </MainContainer>
     </>
   );
 };

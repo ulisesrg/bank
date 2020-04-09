@@ -1,0 +1,18 @@
+.login__card {
+  width: 80%;
+  max-width: 500px;
+  border: 1px solid black;
+  -webkit-border-radius: 25px;
+  -moz-border-radius: 25px;
+  border-radius: 25px;
+  margin-bottom: 5em;
+}
+
+.login__card form {
+  max-width: 500px;
+  margin: 0 10% 10%;
+}
+
+.login__card form .button{
+  margin: 2em auto 0;
+}

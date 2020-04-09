@@ -13,7 +13,7 @@ import Carousel from '../components/Carousel';
 import CarouselItem from '../components/CarouselItem';
 import useInitialState from '../hooks/useInitialState';
 // import '../assets/styles/App.scss';
-import '../assets/styles/App2.scss';
+// import '../assets/styles/App2.scss';
 import '../assets/styles/components/Home.css';
 
 const Home2 = ({ myList, trends, originals }) => {
