@@ -58,6 +58,14 @@ const NewTransfer = (props) => {
     event.preventDefault();
     props.addTransfer(form);
   };
+
+  const maskNumber = (accountNumber) => {
+    const accountNumberStr = accountNumber.toString();
+    const last4Digits = accountNumberStr.slice(-4);
+    const maskedNumber = last4Digits.padStart(accountNumberStr.length, '*');
+    return maskedNumber;
+  };
+
   return (
     <form className='newTransfer' onSubmit={handleTransfer}>
       <label htmlFor='origin'>
@@ -70,7 +78,7 @@ const NewTransfer = (props) => {
               value={item.account}
               data-currency={item.balance.currency}
             >
-              {`${item.account} - ${item.balance.currency}${item.balance.value}`}
+              {`${maskNumber(item.account)} - ${item.balance.currency}${item.balance.value}`}
             </option>
           ))}
         </select>

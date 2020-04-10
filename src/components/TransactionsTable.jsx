@@ -6,10 +6,13 @@ const TransactionsTable = ({ origin, transactions }) => {
     (item) => item.fromAccount === origin
   );
 
-  const year = (date) => {
-    Date(date).getDate();
-    console.log(Date(date));
+  const maskNumber = (accountNumber) => {
+    const accountNumberStr = accountNumber.toString();
+    const last4Digits = accountNumberStr.slice(-4);
+    const maskedNumber = last4Digits.padStart(accountNumberStr.length, '*');
+    return maskedNumber;
   };
+
   return (
     <table className='transactions__table'>
       <thead>
@@ -23,7 +26,7 @@ const TransactionsTable = ({ origin, transactions }) => {
       <tbody>
         {transactionsByOrigin.map((item) => (
           <tr key={`${item.sentAt}${item.amount.value}`}>
-            <td>{item.fromAccount}</td>
+            <td>{maskNumber(item.fromAccount)}</td>
             <td>{item.toAccount}</td>
             <td>
               {new Date(item.sentAt)
@@ -39,7 +42,9 @@ const TransactionsTable = ({ origin, transactions }) => {
                 Number(item.amount.value).toFixed(2))
               }`}
             </td> */}
-            <td>{`${item.amount.currency}${Number(item.amount.value).toFixed(2)}`}</td>
+            <td>{`${item.amount.currency}${Number(item.amount.value).toFixed(
+              2
+            )}`}</td>
           </tr>
         ))}
       </tbody>

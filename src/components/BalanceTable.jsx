@@ -3,6 +3,13 @@ import { connect } from 'react-redux';
 
 const BalanceTable = ({ balance }) => {
   // const { id, cover, title, year, contentRating, duration, isList } = props;
+  const maskNumber = (accountNumber) => {
+    const accountNumberStr = accountNumber.toString();
+    const last4Digits = accountNumberStr.slice(-4);
+    const maskedNumber = last4Digits.padStart(accountNumberStr.length, '*');
+    return maskedNumber;
+  };
+
   return (
     <table>
       <thead>
@@ -13,11 +20,19 @@ const BalanceTable = ({ balance }) => {
         </tr>
       </thead>
       <tbody>
-        {balance.map(item => (
+        {balance.map((item) => (
           <tr key={`${item.account}`}>
-            <td>{item.account}</td>
+            <td>{maskNumber(item.account)}</td>
             <td>{`${item.balance.currency}${item.balance.value}`}</td>
-            <td>{item.createdAt}</td>
+            <td>
+              {new Date(item.createdAt)
+                .toLocaleDateString('en-GB', {
+                  year: '2-digit',
+                  month: 'short',
+                  day: '2-digit',
+                })
+                .replace(/\s/g, '/')}
+            </td>
           </tr>
         ))}
       </tbody>
