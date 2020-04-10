@@ -72,7 +72,7 @@ const PieChart2 = ({ transactions }) => {
     },
   };
 
-  console.log(state)
+  // console.log(state)
 
   return (
     <div className='app'>

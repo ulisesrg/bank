@@ -5,6 +5,9 @@ import '../assets/styles/components/NewTransfer.css';
 import CarouselItem from './CarouselItem';
 
 const NewTransfer = (props) => {
+  const $origin = document.getElementById('origin-label');
+  const $destination = document.getElementById('destination-label');
+  const $value = document.getElementById('value-label');
   const { balance } = props;
   const [form, setValues] = useState({
     fromAccount: '',
@@ -26,6 +29,9 @@ const NewTransfer = (props) => {
           event.target.options[event.target.selectedIndex].dataset.currency,
       },
     });
+    if (event.target.value) {
+      $origin.querySelector('p').remove();
+    }
   };
 
   const handleDestinationInput = (event) => {
@@ -33,6 +39,9 @@ const NewTransfer = (props) => {
       ...form,
       [event.target.name]: Number(event.target.value),
     });
+    if (event.target.value) {
+      $destination.querySelector('p').remove();
+    }
   };
 
   const handleAmountInput = (event) => {
@@ -43,6 +52,9 @@ const NewTransfer = (props) => {
         [event.target.name]: Number(event.target.value),
       },
     });
+    if (event.target.value) {
+      $value.querySelector('p').remove();
+    }
   };
 
   const handleButtonUp = (event) => {
@@ -54,10 +66,85 @@ const NewTransfer = (props) => {
     });
   };
 
+  const handleValidation = (event) => {
+    let valid = true;
+    const data = new FormData(event.target);
+    const fromAccount = data.get('fromAccount');
+    const toAccount = data.get('toAccount');
+    const value = data.get('value');
+    if (!fromAccount) {
+      if ($origin.querySelector('p')) {
+        $origin.querySelector('p').remove();
+      }
+      const node = document.createElement('p');
+      const textnode = document.createTextNode('Select an account');
+      node.appendChild(textnode);
+      $origin.appendChild(node);
+      valid = false;
+    }
+    if (toAccount.length !== 8) {
+      if ($destination.querySelector('p')) {
+        $destionation.querySelector('p').remove();
+      }
+      const node = document.createElement('p');
+      const textnode = document.createTextNode(
+        'Insert an 8 digit account number'
+      );
+      node.appendChild(textnode);
+      $destination.appendChild(node);
+      valid = false;
+    }
+    if (value >= 100000) {
+      if ($value.querySelector('p')) {
+        $value.querySelector('p').remove();
+      }
+      const node = document.createElement('p');
+      const textnode = document.createTextNode(
+        'Amount has to be less than 100000'
+      );
+      node.appendChild(textnode);
+      $value.appendChild(node);
+      valid = false;
+    }
+    if (!value) {
+      if ($value.querySelector('p')) {
+        $value.querySelector('p').remove();
+      }
+      const node = document.createElement('p');
+      const textnode = document.createTextNode('Write an amount');
+      node.appendChild(textnode);
+      $value.appendChild(node);
+      valid = false;
+    }
+    const accountNumbers = balance.map((item) => item.account);
+    const match = accountNumbers.filter(
+      (number) => form.fromAccount === number
+    );
+    function spread(x) {
+      return x;
+    }
+    const matchNumber = spread(...match);
+    const selectedAccountInArray = balance.filter(
+      (balanceAcc) => matchNumber === balanceAcc.account
+    );
+    const selectedAccount = spread(...selectedAccountInArray);
+    const selectedAccountValue = selectedAccount.balance.value;
+    if (value > selectedAccountValue) {
+      alert('Not enough balance to do the transfer');
+      valid = false;
+    }
+    // console.log(selectedAccountValue);
+    // console.log(valid);
+    return valid;
+  };
+
   const handleTransfer = (event) => {
     event.preventDefault();
-    props.addTransfer(form);
-    props.substractFromBalance(form);
+    const valid = handleValidation(event);
+    if (valid) {
+      props.addTransfer(form);
+      props.substractFromBalance(form);
+    }
     // console.log(form.amount.value);
   };
 
@@ -70,7 +157,7 @@ const NewTransfer = (props) => {
 
   return (
     <form className='newTransfer' onSubmit={handleTransfer}>
-      <label htmlFor='origin'>
+      <label htmlFor='origin' id='origin-label'>
         Select origin account
         <select name='fromAccount' id='origin' onChange={handleOriginInput}>
           <option value=''>Select an origin account</option>
@@ -79,13 +166,16 @@ const NewTransfer = (props) => {
               key={item.account}
               value={item.account}
               data-currency={item.balance.currency}
+              data-balance={item.balance.value}
             >
-              {`${maskNumber(item.account)} - ${item.balance.currency}${item.balance.value}`}
+              {`${maskNumber(item.account)} - ${item.balance.currency}${
+                item.balance.value
+              }`}
             </option>
           ))}
         </select>
       </label>
-      <label htmlFor='destination'>
+      <label htmlFor='destination' id='destination-label'>
         Destination account
         <input
           name='toAccount'
@@ -96,7 +186,7 @@ const NewTransfer = (props) => {
           onChange={handleDestinationInput}
         />
       </label>
-      <label htmlFor='amount'>
+      <label htmlFor='amount' id='value-label'>
         Amount
         <input
           name='value'
