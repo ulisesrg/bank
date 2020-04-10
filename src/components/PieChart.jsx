@@ -8,7 +8,7 @@ class PieChart extends Component {
     const uniqueDestinationAccounts = [
       ...new Set(props.transactions.map((item) => item.toAccount)),
     ];
-
+    console.log(props.transactions);
     const sumsOfValuesByDestAccount = uniqueDestinationAccounts.map(account => {
       const transactionsByAccount = props.transactions.filter(transaction => transaction.toAccount === account);
       const valuesByAccount = transactionsByAccount.map(item => item.amount.value);
