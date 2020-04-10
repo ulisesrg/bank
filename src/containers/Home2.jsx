@@ -16,11 +16,11 @@ import useInitialState from '../hooks/useInitialState';
 // import '../assets/styles/App2.scss';
 import '../assets/styles/components/Home.css';
 
-const Home2 = ({ myList, trends, originals }) => {
+const Home2 = ({ user }) => {
   return (
     <>
       <Header2 isHome />
-      <MainContainer section='home' title='Welcome to your online banking'>
+      <MainContainer section='home' title={`Welcome to your online banking ${user.username}`}>
         <Card>
           <CardGraphic>
             <div className='card__placeholder' />
@@ -61,13 +61,11 @@ const Home2 = ({ myList, trends, originals }) => {
   );
 };
 
-// const mapStateToProps = (state) => {
-//   return {
-//     myList: state.myList,
-//     trends: state.trends,
-//     originals: state.originals,
-//   };
-// };
+const mapStateToProps = (state) => {
+  return {
+    user: state.user,
+  };
+};
 
-// export default connect(mapStateToProps, null)(Home2);
-export default Home2;
+export default connect(mapStateToProps, null)(Home2);
+// export default Home2;

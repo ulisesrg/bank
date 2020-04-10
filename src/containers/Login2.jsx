@@ -12,35 +12,37 @@ import googleIcon from '../assets/static/google-icon.png';
 import twitterIcon from '../assets/static/twitter-icon.png';
 
 const Login2 = (props) => {
-  const [form, setValues] = useState({
-    email: '',
-  });
+  const { history } = props;
+  // const [form, setValues] = useState({
+  //   username: '',
+  // });
 
-  const handleInput = (event) => {
-    setValues({
-      ...form,
-      [event.target.name]: event.target.value,
-    });
-  };
+  // const handleInput = (event) => {
+  //   setValues({
+  //     ...form,
+  //     [event.target.name]: event.target.value,
+  //   });
+  // };
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    props.loginRequest(form);
-    props.history.push('/');
-  };
+  // const handleSubmit = (event) => {
+  //   event.preventDefault();
+  //   props.loginRequest(form);
+  //   // props.history.push('/');
+  // };
 
   return (
     <>
       <Header2 isLogin />
       <MainContainer section='login'>
-        <LoginCard />
+        <LoginCard history={history} />
       </MainContainer>
     </>
   );
 };
 
-const mapDispatchToProps = {
-  loginRequest,
-};
+// const mapDispatchToProps = {
+//   loginRequest,
+// };
 
-export default connect(null, mapDispatchToProps)(Login2);
+// export default connect(null, mapDispatchToProps)(Login2);
+export default Login2;
