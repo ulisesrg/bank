@@ -8,7 +8,6 @@ class PieChart extends Component {
     const uniqueDestinationAccounts = [
       ...new Set(props.transactions.map((item) => item.toAccount)),
     ];
-    // console.log(uniqueDestinationAccounts);
 
     const sumsOfValuesByDestAccount = uniqueDestinationAccounts.map(account => {
       const transactionsByAccount = props.transactions.filter(transaction => transaction.toAccount === account);
@@ -16,40 +15,33 @@ class PieChart extends Component {
       const sumOfValues = valuesByAccount.reduce((accumulator, currentValue) => (accumulator + currentValue), 0);
       return sumOfValues;
     });
-    console.log(sumsOfValuesByDestAccount, 'qwerty');
-    
-    // const transactionsByDestination = props.transactions.filter(
-    //   (transaction) => transaction.toAccount === account
-    // );
-
-    // const values = props.transactions.map(
-    //   (transaction) => transaction.amount.value,
-    // );
-    // console.log(values);
+    // console.log(sumsOfValuesByDestAccount, 'qwerty');
+    const graphicLabels = uniqueDestinationAccounts.map(account => {
+      const transactionsByAccount = props.transactions.filter(transaction => transaction.toAccount === account);
+      const valuesByAccount = transactionsByAccount.map(item => item.amount.value);
+      const currencyByAccount = [...new Set(transactionsByAccount.map(item => item.amount.currency))];
+      const sumOfValues = valuesByAccount.reduce((accumulator, currentValue) => (accumulator + currentValue), 0);
+      // const label = `${account} (${currencyByAccount}${sumOfValues})`;
+      const label = [account,'<br />', `${currencyByAccount}${sumOfValues}`];
+      return label;
+    });
 
     this.state = {
-      // options: {
-      //   chart: {
-      //     id: "basic-bar"
-      //   },
-      //   xaxis: {
-      //     categories: [1991, 1992, 1993, 1994, 1995, 1996, 1997, 1998, 1999]
-      //   }
-      // },
-      // series: [
-      //   {
-      //     name: "series-1",
-      //     data: [30, 40, 45, 50, 49, 60, 70, 91]
-      //   }
-      // ]
       series: sumsOfValuesByDestAccount,
       options: {
+        title: {
+          text: 'Transactions by destiny account',
+          align: 'center',
+        },
         chart: {
           width: 380,
           type: 'pie',
         },
-        // labels: ['Team A', 'Team B', 'Team C', 'Team D', 'Team E'],
-        labels: uniqueDestinationAccounts,
+        dataLabels: {
+          enabled: true,
+          textAnchor: 'start',
+        },
+        labels: graphicLabels,
         responsive: [
           {
             breakpoint: 480,

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 // import Header from '../components/Header';
+import PieChart from '../components/PieChart';
 import Header2 from '../components/Header2';
 import MainContainer from '../components/MainContainer';
 import Card from '../components/Card';
@@ -36,7 +37,7 @@ const Transfer = ({ balance }) => {
         <div>
           <Card>
             <CardGraphic>
-              <div className='card__placeholder' />
+              <PieChart />
             </CardGraphic>
           </Card>
         </div>
