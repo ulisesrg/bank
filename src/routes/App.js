@@ -21,10 +21,10 @@ const App = (props) => {
           {/* <Route exact path='/player/:id' component={Player} /> */}
           <Route exact path='/login2' component={Login2} />
           <Route exact path='/home2' component={Home2}>
-            {/* {!hasUser && <Redirect to='/login2' />} */}
+            {!hasUser && <Redirect to='/login2' />}
           </Route>
           <Route exact path='/transfer' component={Transfer}>
-            {/* {!hasUser && <Redirect to='/login2' />} */}
+            {!hasUser && <Redirect to='/login2' />}
           </Route>
           <Route component={NotFound} />
         </Switch>

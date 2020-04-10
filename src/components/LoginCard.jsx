@@ -136,7 +136,7 @@ const LoginCard = (props) => {
             onChange={handlePasswordInput}
           />
         </label>
-        <button className='button' type='submit' disabled>
+        <button className='button' type='submit'>
           Enter
         </button>
       </form>
