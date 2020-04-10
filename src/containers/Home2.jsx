@@ -6,6 +6,7 @@ import MainContainer from '../components/MainContainer';
 import Card from '../components/Card';
 import CardGraphic from '../components/CardGraphic';
 import CardBody from '../components/CardBody';
+import PieChart from '../components/PieChart';
 import BalanceTable from '../components/BalanceTable';
 import Search from '../components/Search';
 import Categories from '../components/Categories';
@@ -20,10 +21,11 @@ const Home2 = ({ user }) => {
   return (
     <>
       <Header2 isHome />
-      <MainContainer section='home' title={`Welcome to your online banking ${user.username}`}>
+      <MainContainer section='home' title={`Welcome to your online banking, ${user.username}`}>
         <Card>
           <CardGraphic>
-            <div className='card__placeholder' />
+            {/* <div className='card__placeholder' /> */}
+            <PieChart />
           </CardGraphic>
           <CardBody title='Transactions History'>
             <p>
@@ -39,7 +41,7 @@ const Home2 = ({ user }) => {
           <CardGraphic>
             <div className='card__placeholder' />
           </CardGraphic>
-          <CardBody title='Current Balance'>
+          <CardBody title='Main Expenses'>
             <p>
               Lorem ipsum dolor sit amet consectetur adipisicing elit.
               Necessitatibus doloribus laudantium officiis corrupti accusantium
