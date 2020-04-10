@@ -40,7 +40,7 @@ const NewTransfer = (props) => {
       ...form,
       amount: {
         ...form.amount,
-        [event.target.name]: event.target.value,
+        [event.target.name]: Number(event.target.value),
       },
     });
   };
@@ -93,7 +93,7 @@ const NewTransfer = (props) => {
           id='amount'
           type='text'
           inputMode='numeric'
-          pattern='[0-9]*'
+          // pattern='[0-9]*'
           onChange={handleAmountInput}
         />
       </label>

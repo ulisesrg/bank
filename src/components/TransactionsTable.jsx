@@ -3,8 +3,13 @@ import { connect } from 'react-redux';
 
 const TransactionsTable = ({ origin, transactions }) => {
   const transactionsByOrigin = transactions.filter(
-    item => item.fromAccount === origin,
+    (item) => item.fromAccount === origin
   );
+
+  const year = (date) => {
+    Date(date).getDate();
+    console.log(Date(date));
+  };
   return (
     <table className='transactions__table'>
       <thead>
@@ -16,15 +21,27 @@ const TransactionsTable = ({ origin, transactions }) => {
         </tr>
       </thead>
       <tbody>
-        {transactionsByOrigin.map(item => (
+        {transactionsByOrigin.map((item) => (
           <tr key={`${item.sentAt}${item.amount.value}`}>
             <td>{item.fromAccount}</td>
             <td>{item.toAccount}</td>
-            <td>{item.sentAt}</td>
-            <td>{`${item.amount.currency}${item.amount.value}`}</td>
+            <td>
+              {new Date(item.sentAt)
+                .toLocaleDateString('en-GB', {
+                  year: '2-digit',
+                  month: 'short',
+                  day: '2-digit',
+                })
+                .replace(/\s/g, '/')}
+            </td>
+            {/* <td>
+              {`${item.amount.currency}${new Intl.NumberFormat().format(
+                Number(item.amount.value).toFixed(2))
+              }`}
+            </td> */}
+            <td>{`${item.amount.currency}${Number(item.amount.value).toFixed(2)}`}</td>
           </tr>
-        ))
-        }
+        ))}
       </tbody>
     </table>
   );
