@@ -1,22 +1,74 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { addTransfer } from '../actions';
 import '../assets/styles/components/NewTransfer.css';
 import CarouselItem from './CarouselItem';
 
-const NewTransfer = ({ balance }) => {
-  // // const [balanceAccounts] = props;
-  // console.log( balance );
+const NewTransfer = (props) => {
+  const { balance } = props;
+  const [form, setValues] = useState({
+    fromAccount: '',
+    toAccount: '',
+    amount: {
+      currency: '',
+      value: '',
+    },
+    sentAt: '',
+  });
+
+  const handleOriginInput = (event) => {
+    setValues({
+      ...form,
+      [event.target.name]: Number(event.target.value),
+      amount: {
+        ...form.amount,
+        currency:
+          event.target.options[event.target.selectedIndex].dataset.currency,
+      },
+    });
+  };
+
+  const handleDestinationInput = (event) => {
+    setValues({
+      ...form,
+      [event.target.name]: Number(event.target.value),
+    });
+  };
+
+  const handleAmountInput = (event) => {
+    setValues({
+      ...form,
+      amount: {
+        ...form.amount,
+        [event.target.name]: event.target.value,
+      },
+    });
+  };
+
+  const handleButtonUp = (event) => {
+    const now = new Date();
+    const nowJson = now.toJSON();
+    setValues({
+      ...form,
+      sentAt: nowJson,
+    });
+  };
+
+  const handleTransfer = (event) => {
+    event.preventDefault();
+    props.addTransfer(form);
+  };
   return (
-    <form className='newTransfer' action=''>
+    <form className='newTransfer' onSubmit={handleTransfer}>
       <label htmlFor='origin'>
         Select origin account
-        <select name='origin' id='origin'>
+        <select name='fromAccount' id='origin' onChange={handleOriginInput}>
           <option value=''>Select an origin account</option>
           {balance.map((item) => (
             <option
               key={item.account}
-              value=''
+              value={item.account}
+              data-currency={item.balance.currency}
             >
               {`${item.account} - ${item.balance.currency}${item.balance.value}`}
             </option>
@@ -26,18 +78,31 @@ const NewTransfer = ({ balance }) => {
       <label htmlFor='destination'>
         Destination account
         <input
+          name='toAccount'
           id='destination'
           type='text'
           inputMode='numeric'
           pattern='[0-9]*'
+          onChange={handleDestinationInput}
         />
       </label>
       <label htmlFor='amount'>
         Amount
-        <input id='amount' type='text' inputMode='numeric' pattern='[0-9]*' />
+        <input
+          name='value'
+          id='amount'
+          type='text'
+          inputMode='numeric'
+          pattern='[0-9]*'
+          onChange={handleAmountInput}
+        />
       </label>
       <div className='buttons'>
-        <button className='button button--transfer' type='button'>
+        <button
+          className='button button--transfer'
+          type='submit'
+          onMouseUp={handleButtonUp}
+        >
           Transfer
         </button>
         <button className='button button--cancel' type='button'>
@@ -58,5 +123,4 @@ const mapDispatchToProps = {
   addTransfer,
 };
 
-// export default NewTransfer;
 export default connect(mapStateToProps, mapDispatchToProps)(NewTransfer);

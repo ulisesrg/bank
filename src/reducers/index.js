@@ -3,7 +3,7 @@ const reducer = (state, action) => {
     case 'ADD_TRANSFER':
       return {
         ...state,
-        myList: [...state.myList, action.payload],
+        transactions: [...state.transactions, action.payload],
       };
     case 'SET_FAVORITE':
       return {

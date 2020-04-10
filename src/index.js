@@ -172,6 +172,10 @@ const initialState = {
 }
 
 const initialState2 = {
+  "user": {},
+  "myList": [],
+  "trends": [],
+  "originals": [],
   "transactions": [
     {
       "fromAccount": 123456789,
