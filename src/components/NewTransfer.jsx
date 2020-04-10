@@ -115,9 +115,7 @@ const NewTransfer = (props) => {
         >
           Transfer
         </button>
-        <button className='button button--cancel' type='button'>
-          Cancel
-        </button>
+        <input className='button button--cancel' type='reset' value='Cancel' />
       </div>
     </form>
   );

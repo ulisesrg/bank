@@ -37,6 +37,11 @@ input, select {
   margin: 0.2em 0;
 }
 
+input[type="reset"] {
+  margin: 0;
+  height: auto;
+}
+
 select {
   box-sizing: content-box;
   background: #ffffff;
