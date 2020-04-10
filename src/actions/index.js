@@ -3,6 +3,11 @@ export const addTransfer = payload => ({
   payload,
 });
 
+export const substractFromBalance = payload => ({
+  type: 'SUBSTRACT_FROM_BALANCE',
+  payload,
+});
+
 export const setFavorite = payload => ({
   type: 'SET_FAVORITE',
   payload,

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
-import { addTransfer } from '../actions';
+import { addTransfer, substractFromBalance } from '../actions';
 import '../assets/styles/components/NewTransfer.css';
 import CarouselItem from './CarouselItem';
 
@@ -57,6 +57,8 @@ const NewTransfer = (props) => {
   const handleTransfer = (event) => {
     event.preventDefault();
     props.addTransfer(form);
+    props.substractFromBalance(form);
+    // console.log(form.amount.value);
   };
 
   const maskNumber = (accountNumber) => {
@@ -129,6 +131,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = {
   addTransfer,
+  substractFromBalance,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(NewTransfer);
