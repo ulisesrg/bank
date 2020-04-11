@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
-import PieChart from '../components/PieChart';
 import PieChart2 from '../components/PieChart2';
 import Header2 from '../components/Header2';
 import MainContainer from '../components/MainContainer';
@@ -14,11 +13,6 @@ import '../assets/styles/App.scss';
 import '../assets/styles/components/Transfer.css';
 
 const Transfer = ({ balance }) => {
-  // const originAccounts = transactions.map((item) => item.fromAccount);
-  // const uniqueOriginAccounts = [
-  //   ...new Set(transactions.map((item) => item.fromAccount)),
-  // ];
-  // console.log(uniqueOriginAccounts);
   return (
     <>
       <Header2 isTransfer />
@@ -41,11 +35,6 @@ const Transfer = ({ balance }) => {
           {balance.map((item) => (
             <TransactionsTable key={item.account} origin={item.account} />
           ))}
-          {/* {uniqueOriginAccounts.map((item) => (
-            <TransactionsTable key={item} origin={item} />
-          ))} */}
-          {/* <TransactionsTable />
-          <TransactionsTable /> */}
         </Transactions>
       </MainContainer>
     </>
