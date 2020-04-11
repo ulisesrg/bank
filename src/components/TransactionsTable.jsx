@@ -37,11 +37,6 @@ const TransactionsTable = ({ origin, transactions }) => {
                 })
                 .replace(/\s/g, '/')}
             </td>
-            {/* <td>
-              {`${item.amount.currency}${new Intl.NumberFormat().format(
-                Number(item.amount.value).toFixed(2))
-              }`}
-            </td> */}
             <td>{`${item.amount.currency}${Number(item.amount.value).toFixed(
               2
             )}`}</td>

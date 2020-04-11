@@ -7,7 +7,6 @@ import '../assets/styles/components/Header2.css';
 const Header2 = (props) => {
   const { user, isHome, isTransfer } = props;
   const hasUser = Object.keys(user).length > 0;
-  // const hasUser = true;
   const handleLogout = () => {
     props.logoutRequest({});
   };

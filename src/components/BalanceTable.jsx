@@ -2,7 +2,6 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 const BalanceTable = ({ balance }) => {
-  // const { id, cover, title, year, contentRating, duration, isList } = props;
   const maskNumber = (accountNumber) => {
     const accountNumberStr = accountNumber.toString();
     const last4Digits = accountNumberStr.slice(-4);
