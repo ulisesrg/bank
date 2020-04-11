@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
-// import Header from '../components/Header';
 import PieChart from '../components/PieChart';
 import PieChart2 from '../components/PieChart2';
 import Header2 from '../components/Header2';
@@ -11,11 +10,6 @@ import CardBody from '../components/CardBody';
 import NewTransfer from '../components/NewTransfer';
 import Transactions from '../components/Transactions';
 import TransactionsTable from '../components/TransactionsTable';
-import Search from '../components/Search';
-import Categories from '../components/Categories';
-import Carousel from '../components/Carousel';
-import CarouselItem from '../components/CarouselItem';
-import useInitialState from '../hooks/useInitialState';
 import '../assets/styles/App.scss';
 import '../assets/styles/components/Transfer.css';
 

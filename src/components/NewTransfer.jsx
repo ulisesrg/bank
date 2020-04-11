@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { addTransfer, substractFromBalance } from '../actions';
 import '../assets/styles/components/NewTransfer.css';
-import CarouselItem from './CarouselItem';
 
 const NewTransfer = (props) => {
   const $origin = document.getElementById('origin-label');
