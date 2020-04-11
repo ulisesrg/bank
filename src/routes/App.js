@@ -16,9 +16,6 @@ const App = (props) => {
       <Layout>
         <Switch>
           <Route exact path='/' component={Login2} />
-          {/* <Route exact path='/login' component={Login} /> */}
-          {/* <Route exact path='/register' component={Register} /> */}
-          {/* <Route exact path='/player/:id' component={Player} /> */}
           <Route exact path='/login' component={Login2} />
           <Route exact path='/home' component={Home2}>
             {!hasUser && <Redirect to='/login' />}
@@ -32,7 +29,6 @@ const App = (props) => {
     </BrowserRouter>
   );
 };
-// export default App;
 
 const mapStateToProps = (state) => {
   return {

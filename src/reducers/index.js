@@ -1,5 +1,3 @@
-import { object } from "prop-types";
-
 const reducer = (state, action) => {
   switch (action.type) {
     case 'ADD_TRANSFER':
