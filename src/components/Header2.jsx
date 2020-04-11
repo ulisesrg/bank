@@ -28,8 +28,8 @@ const Header2 = (props) => {
           </li>
           {hasUser && (
             <li>
-              <Link className={isHomeActive} to='/home2'>
-                Home2
+              <Link className={isHomeActive} to='/home'>
+                Home
               </Link>
             </li>
           )}
@@ -41,7 +41,11 @@ const Header2 = (props) => {
             </li>
           )}
         </ul>
-        <Link to='/login2' onClick={handleLogout}>Log Out</Link>
+        {hasUser && (
+          <Link to='/login' onClick={handleLogout}>
+            Log Out
+          </Link>
+        )}
       </nav>
     </header>
   );

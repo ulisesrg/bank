@@ -111,7 +111,7 @@ const LoginCard = (props) => {
   const handleSubmit = (event) => {
     event.preventDefault();
     props.loginRequest(form);
-    props.history.push('/home2');
+    props.history.push('/home');
   };
 
   return (
