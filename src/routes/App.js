@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
-import '../assets/styles/App2.scss';
+import '../assets/styles/App2.css';
 import NotFound from '../containers/NotFound';
 import Layout from '../components/Layout';
 import Login2 from '../containers/Login2';

@@ -2,7 +2,6 @@ import React from 'react';
 import Header2 from '../components/Header2';
 import MainContainer from '../components/MainContainer';
 import LoginCard from '../components/LoginCard';
-import '../assets/styles/components/Login.scss';
 import '../assets/styles/components/Login.css';
 
 const Login2 = (props) => {

@@ -9,7 +9,6 @@ import CardBody from '../components/CardBody';
 import NewTransfer from '../components/NewTransfer';
 import Transactions from '../components/Transactions';
 import TransactionsTable from '../components/TransactionsTable';
-import '../assets/styles/App.scss';
 import '../assets/styles/components/Transfer.css';
 
 const Transfer = ({ balance }) => {

@@ -2,8 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { logoutRequest } from '../actions';
-// import '../assets/styles/components/Header.scss';
-import '../assets/styles/components/Header2.scss';
+import '../assets/styles/components/Header2.css';
 
 const Header2 = (props) => {
   const { user, isHome, isTransfer } = props;
