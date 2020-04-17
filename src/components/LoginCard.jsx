@@ -1,16 +1,45 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { loginRequest } from '../actions';
 
 import '../assets/styles/components/LoginCard.css';
 
 const LoginCard = (props) => {
-  const $usernameLabel = document.getElementById('username-label');
-  const $passwordLabel = document.getElementById('password-label');
   const [form, setValues] = useState({
     username: '',
   });
-  function validateSpecialChars() {
+
+  function validateEmpty(event, container) {
+    if (event.target.value.length === 0) {
+      const node = document.createElement('p');
+      node.setAttribute('class', 'empty');
+      const textnode = document.createTextNode('Write an username');
+      node.appendChild(textnode);
+      container.appendChild(node);
+    } else if (document.querySelector('.empty')) {
+      document.querySelector('.empty').remove();
+    }
+  }
+
+  function validateCharsLength(event, container) {
+    if (document.querySelector('.length')) {
+      document.querySelector('.length').remove();
+    }
+    if (
+      (event.target.value.length > 0 && event.target.value.length < 8) ||
+      event.target.value.length > 20
+    ) {
+      const node = document.createElement('p');
+      node.setAttribute('class', 'length');
+      const textnode = document.createTextNode(
+        'Username length should be between 8 and 20 characters'
+      );
+      node.appendChild(textnode);
+      container.appendChild(node);
+    }
+  }
+
+  function validateSpecialChars(event, container) {
     const specialChars = /[^a-zA-Z0-9ñÑ!"$%&/]/g;
     if (document.querySelector('.char')) {
       document.querySelector('.char').remove();
@@ -22,90 +51,90 @@ const LoginCard = (props) => {
         'Characters allowed: letters, numbers, !, ", $, %, &, /'
       );
       node.appendChild(textnode);
-      $usernameLabel.appendChild(node);
+      container.appendChild(node);
     }
   }
 
-  function validateEmpty() {
-    if (document.querySelector('.empty')) {
-      document.querySelector('.empty').remove();
+  function validateEmptyPass(event, container) {
+    if (document.querySelector('.empty-p')) {
+      document.querySelector('.empty-p').remove();
     }
     if (event.target.value.length === 0) {
       const node = document.createElement('p');
-      node.setAttribute('class', 'empty');
-      const textnode = document.createTextNode('Write an username');
+      node.setAttribute('class', 'empty-p');
+      const textnode = document.createTextNode('Write a password');
       node.appendChild(textnode);
-      $usernameLabel.appendChild(node);
-      valid = false;
+      container.appendChild(node);
     }
   }
 
-  function validateCharsLength() {
-    if (document.querySelector('.length')) {
-      document.querySelector('.length').remove();
+  function validateCharsLengthPass(event, container) {
+    if (document.querySelector('.length-p')) {
+      document.querySelector('.length-p').remove();
     }
-    if (event.target.value.length < 8 || event.target.value.length > 20) {
+    if (
+      (event.target.value.length > 0 && event.target.value.length < 8) ||
+      event.target.value.length > 20
+    ) {
       const node = document.createElement('p');
-      node.setAttribute('class', 'length');
+      node.setAttribute('class', 'length-p');
       const textnode = document.createTextNode(
-        'Username length should be between 8 and 20 characters'
+        'Password length should be between 8 and 20 characters'
       );
       node.appendChild(textnode);
-      $usernameLabel.appendChild(node);
-      console.log('ño');
+      container.appendChild(node);
     }
   }
 
-  // function validateSpecialCharsPass() {
-  //   const specialChars = /[^a-zA-Z0-9ñÑ!"$%&/]/g;
-  //   if (document.querySelector('.char-p')) {
-  //     document.querySelector('.char-p').remove();
-  //   }
-  //   if (event.target.value.match(specialChars)) {
-  //     console.log('ño');
-  //     const node = document.createElement('p');
-  //     node.setAttribute('class', 'char-p');
-  //     const textnode = document.createTextNode(
-  //       'Characters allowed: letters, numbers, !, ", $, %, &, /'
-  //     );
-  //     node.appendChild(textnode);
-  //     $passwordLabel.appendChild(node);
-  //   } else {
-  //     console.log('chi');
-  //   }
-  // }
+  function validateSpecialCharsPass(event, container) {
+    const specialChars = /[^a-zA-Z0-9ñÑ!"$%&/]/g;
+    if (document.querySelector('.char-p')) {
+      document.querySelector('.char-p').remove();
+    }
+    if (event.target.value.match(specialChars)) {
+      const node = document.createElement('p');
+      node.setAttribute('class', 'char-p');
+      const textnode = document.createTextNode(
+        'Special characters accepted ! " $ % & /'
+      );
+      node.appendChild(textnode);
+      container.appendChild(node);
+    }
+  }
 
-  // function validateEmptyPass() {
-  //   if (document.querySelector('.empty-p')) {
-  //     document.querySelector('.empty-p').remove();
-  //   }
-  //   if (event.target.value.length === 0) {
-  //     const node = document.createElement('p');
-  //     node.setAttribute('class', 'empty-p');
-  //     const textnode = document.createTextNode('Write an username');
-  //     node.appendChild(textnode);
-  //     console.log($passwordLabel);
-  //     $passwordLabel.appendChild(node);
-  //     valid = false;
-  //   }
-  // }
+  function validateMustContainCharsPass(event, container) {
+    const specialChars = /(?=.*[a-z])(?=.*[A-Z])(?=.*[!"$%&/])(?!.*(01|12|23|34|45|56|67|78|89))/g;
+    if (document.querySelector('.must-p')) {
+      document.querySelector('.must-p').remove();
+    }
+    if (!specialChars.test(event.target.value)) {
+      const node = document.createElement('p');
+      node.setAttribute('class', 'must-p');
+      const textnode = document.createTextNode(
+        'Password must contain 1 lowercase, 1 uppercase and 1 special character. No sequence of number allowed, e.g. "23"'
+      );
+      node.appendChild(textnode);
+      container.appendChild(node);
+    }
+  }
 
   const handleUserInput = (event) => {
     setValues({
       ...form,
       [event.target.name]: event.target.value,
     });
-    validateEmpty();
-    validateCharsLength();
-    validateSpecialChars();
-    console.log($usernameLabel);
-    console.log($passwordLabel);
+    const $usernameLabel = document.getElementById('username-label');
+    validateEmpty(event, $usernameLabel);
+    validateCharsLength(event, $usernameLabel);
+    validateSpecialChars(event, $usernameLabel);
   };
 
   const handlePasswordInput = (event) => {
-    // validateEmptyPass();
-    // validateCharsLengthPass();
-    // validateSpecialCharsPass();
+    const $passwordLabel = document.getElementById('password-label');
+    validateEmptyPass(event, $passwordLabel);
+    validateCharsLengthPass(event, $passwordLabel);
+    validateSpecialCharsPass(event, $passwordLabel);
+    validateMustContainCharsPass(event, $passwordLabel);
   };
 
   const handleSubmit = (event) => {
@@ -148,5 +177,4 @@ const mapDispatchToProps = {
   loginRequest,
 };
 
-// export default LoginCard;
 export default connect(null, mapDispatchToProps)(LoginCard);
