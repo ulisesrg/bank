@@ -9,16 +9,22 @@ const LoginCard = (props) => {
     username: '',
   });
 
+  let validUsername = false;
+  let validPassword = false;
+
   function validateEmpty(event, container) {
+    if (document.querySelector('.empty')) {
+      document.querySelector('.empty').remove();
+    }
     if (event.target.value.length === 0) {
       const node = document.createElement('p');
       node.setAttribute('class', 'empty');
       const textnode = document.createTextNode('Write an username');
       node.appendChild(textnode);
       container.appendChild(node);
-    } else if (document.querySelector('.empty')) {
-      document.querySelector('.empty').remove();
+      return false;
     }
+    return true;
   }
 
   function validateCharsLength(event, container) {
@@ -36,7 +42,9 @@ const LoginCard = (props) => {
       );
       node.appendChild(textnode);
       container.appendChild(node);
+      return false;
     }
+    return true;
   }
 
   function validateSpecialChars(event, container) {
@@ -52,7 +60,9 @@ const LoginCard = (props) => {
       );
       node.appendChild(textnode);
       container.appendChild(node);
+      return false;
     }
+    return true;
   }
 
   function validateEmptyPass(event, container) {
@@ -65,7 +75,9 @@ const LoginCard = (props) => {
       const textnode = document.createTextNode('Write a password');
       node.appendChild(textnode);
       container.appendChild(node);
+      return false;
     }
+    return true;
   }
 
   function validateCharsLengthPass(event, container) {
@@ -83,7 +95,9 @@ const LoginCard = (props) => {
       );
       node.appendChild(textnode);
       container.appendChild(node);
+      return false;
     }
+    return true;
   }
 
   function validateSpecialCharsPass(event, container) {
@@ -99,7 +113,9 @@ const LoginCard = (props) => {
       );
       node.appendChild(textnode);
       container.appendChild(node);
+      return false;
     }
+    return true;
   }
 
   function validateMustContainCharsPass(event, container) {
@@ -107,7 +123,10 @@ const LoginCard = (props) => {
     if (document.querySelector('.must-p')) {
       document.querySelector('.must-p').remove();
     }
-    if (!specialChars.test(event.target.value)) {
+    if (
+      event.target.value.length > 0 &&
+      !specialChars.test(event.target.value)
+    ) {
       const node = document.createElement('p');
       node.setAttribute('class', 'must-p');
       const textnode = document.createTextNode(
@@ -115,31 +134,47 @@ const LoginCard = (props) => {
       );
       node.appendChild(textnode);
       container.appendChild(node);
+      return false;
     }
+    return true;
   }
 
+  const handleValidation = () => {
+    const $button = document.querySelector('button');
+    console.log(validUsername, validPassword);
+    if (validUsername && validPassword) {
+      $button.disabled = false;
+    } else {
+      $button.disabled = true;
+    }
+  };
+
   const handleUserInput = (event) => {
-    setValues({
-      ...form,
-      [event.target.name]: event.target.value,
-    });
+    // setValues({
+    //   ...form,
+    //   [event.target.name]: event.target.value,
+    // });
     const $usernameLabel = document.getElementById('username-label');
-    validateEmpty(event, $usernameLabel);
-    validateCharsLength(event, $usernameLabel);
-    validateSpecialChars(event, $usernameLabel);
+    const validEmpty = validateEmpty(event, $usernameLabel);
+    const validLength = validateCharsLength(event, $usernameLabel);
+    const validSpecial = validateSpecialChars(event, $usernameLabel);
+    validUsername = validEmpty && validLength && validSpecial;
+    handleValidation();
   };
 
   const handlePasswordInput = (event) => {
     const $passwordLabel = document.getElementById('password-label');
-    validateEmptyPass(event, $passwordLabel);
-    validateCharsLengthPass(event, $passwordLabel);
-    validateSpecialCharsPass(event, $passwordLabel);
-    validateMustContainCharsPass(event, $passwordLabel);
+    const validEmpty = validateEmptyPass(event, $passwordLabel);
+    const validLength = validateCharsLengthPass(event, $passwordLabel);
+    const validSpecial = validateSpecialCharsPass(event, $passwordLabel);
+    const validMust = validateMustContainCharsPass(event, $passwordLabel);
+    validPassword = validEmpty && validLength && validSpecial && validMust;
+    handleValidation();
   };
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    props.loginRequest(form);
+    // props.loginRequest(form);
     props.history.push('/home');
   };
 
@@ -165,7 +200,7 @@ const LoginCard = (props) => {
             onChange={handlePasswordInput}
           />
         </label>
-        <button className='button' type='submit'>
+        <button className='button' type='submit' disabled>
           Enter
         </button>
       </form>
