@@ -130,7 +130,7 @@ const LoginCard = (props) => {
   const handleSubmit = (event) => {
     event.preventDefault();
     // handleValidation();
-    // props.loginRequest(form);
+    props.loginRequest(form.username.value);
     props.history.push('/home');
   };
 

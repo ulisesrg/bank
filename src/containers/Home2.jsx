@@ -13,7 +13,7 @@ const Home2 = ({ user }) => {
   return (
     <>
       <Header2 isHome />
-      <MainContainer section='home' title={`Welcome to your online banking, ${user.username}`}>
+      <MainContainer section='home' title={`Welcome to your online banking, ${user}`}>
         <Card>
           <CardGraphic>
             <PieChart />
@@ -55,6 +55,7 @@ const Home2 = ({ user }) => {
 };
 
 const mapStateToProps = (state) => {
+  console.log(state)
   return {
     user: state.user,
   };
