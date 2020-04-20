@@ -8,7 +8,7 @@ This app was developed with Flux architecture, through Redux (and React-Redux). 
 
 ApexCharts was used to obtain the pie charts. It is an open-source charts library for frontend development.
 
-This project is not completed yet but this is as far as I could do before the deadline. The login page still needs an user validation system to be completed and I know that some parts of the code can still be improved.
+The project was not completed before the deadline (Friday Aptil 10th). The login page still needed an user validation to be completed and some parts of the code could be refactored. However, the project is still being improved after that date.
 
 
 

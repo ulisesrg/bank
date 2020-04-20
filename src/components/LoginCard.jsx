@@ -20,110 +20,128 @@ const LoginCard = (props) => {
   };
 
   const handleUserInput = (event) => {
+    setValues({
+      ...form,
+      username: {
+        ...form.username,
+        value: event.target.value,
+        // error: '',
+      },
+    });
+  };
+
+  const handleUserInputBlur = (event) => {
     const notAllowedChars = /[^a-zA-Z0-9ñÑ!"$%&/]/g;
     if (!event.target.value) {
-      setValues({
-        ...form,
-        username: {
-          ...form.username,
-          value: event.target.value,
-          error: 'Write an unsername',
-        },
-      });
-      // console.log(2);
+      // setTimeout(() => {
+        setValues({
+          ...form,
+          username: {
+            ...form.username,
+            error: 'Write an unsername',
+          },
+        });
+      // }, 1000);
     } else if (
       (event.target.value.length > 0 && event.target.value.length < 8) ||
       event.target.value.length > 20
     ) {
-      setValues({
-        ...form,
-        username: {
-          ...form.username,
-          value: event.target.value,
-          error: 'Username length should be between 8 and 20 characters',
-        },
-      });
-      // console.log(3);
+      // setTimeout(() => {
+        setValues({
+          ...form,
+          username: {
+            ...form.username,
+            error: 'Username length should be between 8 and 20 characters',
+          },
+        });
+      // }, 1000);
     } else if (event.target.value.match(notAllowedChars)) {
-      setValues({
-        ...form,
-        username: {
-          ...form.username,
-          value: event.target.value,
-          error: 'Characters allowed: letters, numbers, !, ", $, %, &, /',
-        },
-      });
-      // console.log(4);
+      // setTimeout(() => {
+        setValues({
+          ...form,
+          username: {
+            ...form.username,
+            error: 'Characters allowed: letters, numbers, !, ", $, %, &, /',
+          },
+        });
+      // }, 1000);
     } else {
       setValues({
         ...form,
         username: {
           ...form.username,
-          value: event.target.value,
           error: '',
         },
       });
-      // console.log(1);
     }
   };
 
   const handlePasswordInput = (event) => {
+    setValues({
+      ...form,
+      password: {
+        ...form.password,
+        value: event.target.value,
+        // error: '',
+      },
+    });
+  };
+
+  const handlePasswordInputBlur = (event) => {
     const notAllowedChars = /[^a-zA-Z0-9ñÑ!"$%&/]/g;
     const necessaryChars = /(?=.*[a-z])(?=.*[A-Z])(?=.*[!"$%&/])(?!.*(01|12|23|34|45|56|67|78|89))/g;
     if (!event.target.value) {
-      setValues({
-        ...form,
-        password: {
-          ...form.password,
-          value: event.target.value,
-          error: 'Write an unsername',
-        },
-      });
-      // console.log(2);
+      // setTimeout(() => {
+        setValues({
+          ...form,
+          password: {
+            ...form.password,
+            error: 'Write an unsername',
+          },
+        });
+      // }, 1000);
     } else if (
       (event.target.value.length > 0 && event.target.value.length < 8) ||
       event.target.value.length > 20
     ) {
-      setValues({
-        ...form,
-        password: {
-          ...form.password,
-          value: event.target.value,
-          error: 'Password length should be between 8 and 20 characters',
-        },
-      });
-      // console.log(3);
+      // setTimeout(() => {
+        setValues({
+          ...form,
+          password: {
+            ...form.password,
+            error: 'Password length should be between 8 and 20 characters',
+          },
+        });
+      // }, 1000);
     } else if (event.target.value.match(notAllowedChars)) {
-      setValues({
-        ...form,
-        password: {
-          ...form.password,
-          value: event.target.value,
-          error: 'Characters allowed: letters, numbers, !, ", $, %, &, /',
-        },
-      });
-      // console.log(4);
+      // setTimeout(() => {
+        setValues({
+          ...form,
+          password: {
+            ...form.password,
+            error: 'Characters allowed: letters, numbers, !, ", $, %, &, /',
+          },
+        });
+      // }, 1000);
     } else if (!necessaryChars.test(event.target.value)) {
-      setValues({
-        ...form,
-        password: {
-          ...form.password,
-          value: event.target.value,
-          error:
-            'Password must contain 1 lowercase, 1 uppercase and 1 special character. No sequence of number allowed, e.g. "23"',
-        },
-      });
-      // console.log(4);
+      // setTimeout(() => {
+        setValues({
+          ...form,
+          password: {
+            ...form.password,
+            error:
+              'Password must contain 1 lowercase, 1 uppercase and 1 special character. No sequence of number allowed, e.g. "23"',
+          },
+        });
+      // }, 1000);
     } else {
       setValues({
         ...form,
         password: {
           ...form.password,
-          value: event.target.value,
           error: '',
         },
       });
-      // console.log(1);
     }
   };
 
@@ -145,6 +163,7 @@ const LoginCard = (props) => {
             id='username'
             type='text'
             onChange={handleUserInput}
+            onBlur={handleUserInputBlur}
             value={form.username.value}
           />
         </label>
@@ -158,6 +177,8 @@ const LoginCard = (props) => {
             id='password'
             type='password'
             onChange={handlePasswordInput}
+            onBlur={handlePasswordInputBlur}
+            value={form.password.value}
           />
         </label>
         {form.password.error && (
