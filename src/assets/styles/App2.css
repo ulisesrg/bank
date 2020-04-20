@@ -19,7 +19,8 @@ th, td {
 label {
   display: flex;
   flex-direction: column;
-  margin-bottom: 1em;
+  /* margin-bottom: 1em; */
+  margin-top: 1em;
   color: #7e7e7e;
 }
 
@@ -44,7 +45,8 @@ select {
   background: #ffffff;
 }
 
-label p {
+label p,
+.error {
   color: red;
 }
 
