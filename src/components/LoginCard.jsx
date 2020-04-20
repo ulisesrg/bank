@@ -6,26 +6,34 @@ import '../assets/styles/components/LoginCard.css';
 
 const LoginCard = (props) => {
   const [form, setValues] = useState({
-    username: { value: '', error: '' },
-    password: { value: '', error: '' },
+    username: { value: '', error: '', timer: null, valid: false },
+    password: { value: '', error: '', timer: null, valid: false },
   });
 
-  console.log('render');
-
+  // let validform = false;
+  // const { username, password } = form;
+  // console.log('render', form.username.timer, validUser);
+  // let validForm = false;
   const validForm = () => {
     const { username, password } = form;
-    return (
-      username.value && password.value && !username.error && !password.error
-    );
+    return username.valid && password.valid;
   };
 
+  console.log(validForm(), form.username.valid, form.password.valid);
+
   const handleUserInput = (event) => {
+    clearTimeout(form.username.timer);
+    // if (!event.target.value || 
+    //   event.target.value.length < 8 ||
+    //   event.target.value.length > 20
+    //   )
     setValues({
       ...form,
       username: {
         ...form.username,
         value: event.target.value,
-        // error: '',
+        error: '',
+        valid: false,
       },
     });
   };
@@ -33,56 +41,83 @@ const LoginCard = (props) => {
   const handleUserInputBlur = (event) => {
     const notAllowedChars = /[^a-zA-Z0-9ñÑ!"$%&/]/g;
     if (!event.target.value) {
-      // setTimeout(() => {
+      const timeoutId = setTimeout(() => {
         setValues({
           ...form,
           username: {
             ...form.username,
             error: 'Write an unsername',
+            timer: timeoutId,
           },
         });
-      // }, 1000);
+      }, 3000);
+      setValues({
+        ...form,
+        username: {
+          ...form.username,
+          timer: timeoutId,
+        },
+      });
     } else if (
       (event.target.value.length > 0 && event.target.value.length < 8) ||
       event.target.value.length > 20
     ) {
-      // setTimeout(() => {
+      const timeoutId = setTimeout(() => {
         setValues({
           ...form,
           username: {
             ...form.username,
             error: 'Username length should be between 8 and 20 characters',
+            timer: timeoutId,
           },
         });
-      // }, 1000);
+      }, 3000);
+      setValues({
+        ...form,
+        username: {
+          ...form.username,
+          timer: timeoutId,
+        },
+      });
     } else if (event.target.value.match(notAllowedChars)) {
-      // setTimeout(() => {
+      const timeoutId = setTimeout(() => {
         setValues({
           ...form,
           username: {
             ...form.username,
             error: 'Characters allowed: letters, numbers, !, ", $, %, &, /',
+            timer: timeoutId,
           },
         });
-      // }, 1000);
+      }, 3000);
+      setValues({
+        ...form,
+        username: {
+          ...form.username,
+          timer: timeoutId,
+        },
+      });
     } else {
       setValues({
         ...form,
         username: {
           ...form.username,
           error: '',
+          valid: true,
         },
       });
     }
   };
 
   const handlePasswordInput = (event) => {
+    clearTimeout(form.password.timer);
     setValues({
       ...form,
       password: {
         ...form.password,
         value: event.target.value,
-        // error: '',
+        error: '',
+        valid: false,
       },
     });
   };
@@ -91,55 +126,88 @@ const LoginCard = (props) => {
     const notAllowedChars = /[^a-zA-Z0-9ñÑ!"$%&/]/g;
     const necessaryChars = /(?=.*[a-z])(?=.*[A-Z])(?=.*[!"$%&/])(?!.*(01|12|23|34|45|56|67|78|89))/g;
     if (!event.target.value) {
-      // setTimeout(() => {
+      const timeoutId = setTimeout(() => {
         setValues({
           ...form,
           password: {
             ...form.password,
             error: 'Write an unsername',
+            timer: timeoutId,
           },
         });
-      // }, 1000);
+      }, 3000);
+      setValues({
+        ...form,
+        password: {
+          ...form.password,
+          timer: timeoutId,
+        },
+      });
     } else if (
       (event.target.value.length > 0 && event.target.value.length < 8) ||
       event.target.value.length > 20
     ) {
-      // setTimeout(() => {
+      const timeoutId = setTimeout(() => {
         setValues({
           ...form,
           password: {
             ...form.password,
             error: 'Password length should be between 8 and 20 characters',
+            timer: timeoutId,
           },
         });
-      // }, 1000);
+      }, 3000);
+      setValues({
+        ...form,
+        password: {
+          ...form.password,
+          timer: timeoutId,
+        },
+      });
     } else if (event.target.value.match(notAllowedChars)) {
-      // setTimeout(() => {
+      const timeoutId = setTimeout(() => {
         setValues({
           ...form,
           password: {
             ...form.password,
             error: 'Characters allowed: letters, numbers, !, ", $, %, &, /',
+            timer: timeoutId,
           },
         });
-      // }, 1000);
+      }, 3000);
+      setValues({
+        ...form,
+        password: {
+          ...form.password,
+          timer: timeoutId,
+        },
+      });
     } else if (!necessaryChars.test(event.target.value)) {
-      // setTimeout(() => {
+      const timeoutId = setTimeout(() => {
         setValues({
           ...form,
           password: {
             ...form.password,
             error:
               'Password must contain 1 lowercase, 1 uppercase and 1 special character. No sequence of number allowed, e.g. "23"',
+            timer: timeoutId,
           },
         });
-      // }, 1000);
+      }, 3000);
+      setValues({
+        ...form,
+        password: {
+          ...form.password,
+          timer: timeoutId,
+        },
+      });
     } else {
       setValues({
         ...form,
         password: {
           ...form.password,
           error: '',
+          valid: true,
         },
       });
     }
