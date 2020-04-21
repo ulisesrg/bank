@@ -6,14 +6,27 @@ import '../assets/styles/components/LoginCard.css';
 
 const LoginCard = (props) => {
   const [form, setValues] = useState({
-    username: { value: '', error: '', timer: null, valid: false },
-    password: { value: '', error: '', timer: null, valid: false },
+    username: { value: '', error: '', valid: '' },
+    password: { value: '', error: '' },
   });
 
-  // let validform = false;
-  // const { username, password } = form;
-  // console.log('render', form.username.timer, validUser);
-  // let validForm = false;
+  useEffect(() => {
+    const $userErrorMsg = document.querySelector('.error.user-error');
+    const $passwordErrorMsg = document.querySelector('.error.password-error');
+    if ($userErrorMsg) {
+      setTimeout(() => {
+        $userErrorMsg.classList.add('show');
+      }, 1000);
+    }
+    if ($passwordErrorMsg) {
+      setTimeout(() => {
+        $passwordErrorMsg.classList.add('show');
+      }, 1000);
+    }
+  });
+
+  console.log('render');
+
   const validForm = () => {
     const { username, password } = form;
     return username.valid && password.valid;
@@ -33,7 +46,6 @@ const LoginCard = (props) => {
         ...form.username,
         value: event.target.value,
         error: '',
-        valid: false,
       },
     });
   };
@@ -41,60 +53,30 @@ const LoginCard = (props) => {
   const handleUserInputBlur = (event) => {
     const notAllowedChars = /[^a-zA-Z0-9ñÑ!"$%&/]/g;
     if (!event.target.value) {
-      const timeoutId = setTimeout(() => {
-        setValues({
-          ...form,
-          username: {
-            ...form.username,
-            error: 'Write an unsername',
-            timer: timeoutId,
-          },
-        });
-      }, 3000);
       setValues({
         ...form,
         username: {
           ...form.username,
-          timer: timeoutId,
+          error: 'Write an username',
         },
       });
     } else if (
       (event.target.value.length > 0 && event.target.value.length < 8) ||
       event.target.value.length > 20
     ) {
-      const timeoutId = setTimeout(() => {
-        setValues({
-          ...form,
-          username: {
-            ...form.username,
-            error: 'Username length should be between 8 and 20 characters',
-            timer: timeoutId,
-          },
-        });
-      }, 3000);
       setValues({
         ...form,
         username: {
           ...form.username,
-          timer: timeoutId,
+          error: 'Username length should be between 8 and 20 characters',
         },
       });
     } else if (event.target.value.match(notAllowedChars)) {
-      const timeoutId = setTimeout(() => {
-        setValues({
-          ...form,
-          username: {
-            ...form.username,
-            error: 'Characters allowed: letters, numbers, !, ", $, %, &, /',
-            timer: timeoutId,
-          },
-        });
-      }, 3000);
       setValues({
         ...form,
         username: {
           ...form.username,
-          timer: timeoutId,
+          error: 'Characters allowed: letters, numbers, !, ", $, %, &, /',
         },
       });
     } else {
@@ -117,7 +99,6 @@ const LoginCard = (props) => {
         ...form.password,
         value: event.target.value,
         error: '',
-        valid: false,
       },
     });
   };
@@ -126,79 +107,39 @@ const LoginCard = (props) => {
     const notAllowedChars = /[^a-zA-Z0-9ñÑ!"$%&/]/g;
     const necessaryChars = /(?=.*[a-z])(?=.*[A-Z])(?=.*[!"$%&/])(?!.*(01|12|23|34|45|56|67|78|89))/g;
     if (!event.target.value) {
-      const timeoutId = setTimeout(() => {
-        setValues({
-          ...form,
-          password: {
-            ...form.password,
-            error: 'Write an unsername',
-            timer: timeoutId,
-          },
-        });
-      }, 3000);
       setValues({
         ...form,
         password: {
           ...form.password,
-          timer: timeoutId,
+          error: 'Write an password',
         },
       });
     } else if (
       (event.target.value.length > 0 && event.target.value.length < 8) ||
       event.target.value.length > 20
     ) {
-      const timeoutId = setTimeout(() => {
-        setValues({
-          ...form,
-          password: {
-            ...form.password,
-            error: 'Password length should be between 8 and 20 characters',
-            timer: timeoutId,
-          },
-        });
-      }, 3000);
       setValues({
         ...form,
         password: {
           ...form.password,
-          timer: timeoutId,
+          error: 'Password length should be between 8 and 20 characters',
         },
       });
     } else if (event.target.value.match(notAllowedChars)) {
-      const timeoutId = setTimeout(() => {
-        setValues({
-          ...form,
-          password: {
-            ...form.password,
-            error: 'Characters allowed: letters, numbers, !, ", $, %, &, /',
-            timer: timeoutId,
-          },
-        });
-      }, 3000);
       setValues({
         ...form,
         password: {
           ...form.password,
-          timer: timeoutId,
+          error: 'Characters allowed: letters, numbers, !, ", $, %, &, /',
         },
       });
     } else if (!necessaryChars.test(event.target.value)) {
-      const timeoutId = setTimeout(() => {
-        setValues({
-          ...form,
-          password: {
-            ...form.password,
-            error:
-              'Password must contain 1 lowercase, 1 uppercase and 1 special character. No sequence of number allowed, e.g. "23"',
-            timer: timeoutId,
-          },
-        });
-      }, 3000);
       setValues({
         ...form,
         password: {
           ...form.password,
-          timer: timeoutId,
+          error:
+            'Password must contain 1 lowercase, 1 uppercase and 1 special character. No sequence of number allowed, e.g. "23"',
         },
       });
     } else {
@@ -215,9 +156,11 @@ const LoginCard = (props) => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    // handleValidation();
-    props.loginRequest(form.username.value);
-    props.history.push('/home');
+    console.log(form.password.error);
+    if (validForm()) {
+      props.loginRequest(form.username.value);
+      props.history.push('/home');
+    }
   };
 
   return (
@@ -236,7 +179,7 @@ const LoginCard = (props) => {
           />
         </label>
         {form.username.error && (
-          <span className='error'>{form.username.error}</span>
+          <span className='error user-error'>{form.username.error}</span>
         )}
         <label htmlFor='password' id='password-label'>
           Password
@@ -250,17 +193,19 @@ const LoginCard = (props) => {
           />
         </label>
         {form.password.error && (
-          <span className='error'>{form.password.error}</span>
+          <span className='error password-error'>{form.password.error}</span>
         )}
-        {validForm() ? (
+        {
+          // validForm() ? (
           <button className='button' type='submit'>
             Enter
           </button>
-        ) : (
-          <button className='button' type='submit' disabled>
-            Enter
-          </button>
-        )}
+          // ) : (
+          // <button className='button' type='submit' disabled>
+          //   Enter
+          // </button>
+          // )
+        }
       </form>
     </div>
   );
