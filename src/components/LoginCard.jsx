@@ -6,7 +6,7 @@ import '../assets/styles/components/LoginCard.css';
 
 const LoginCard = (props) => {
   const [form, setValues] = useState({
-    username: { value: '', error: '', valid: '' },
+    username: { value: '', error: '' },
     password: { value: '', error: '' },
   });
 
@@ -25,21 +25,16 @@ const LoginCard = (props) => {
     }
   });
 
-  console.log('render');
+  // console.log('render');
 
   const validForm = () => {
     const { username, password } = form;
-    return username.valid && password.valid;
+    return (
+      username.value && password.value && !username.error && !password.error
+    );
   };
 
-  console.log(validForm(), form.username.valid, form.password.valid);
-
   const handleUserInput = (event) => {
-    clearTimeout(form.username.timer);
-    // if (!event.target.value || 
-    //   event.target.value.length < 8 ||
-    //   event.target.value.length > 20
-    //   )
     setValues({
       ...form,
       username: {
@@ -92,7 +87,6 @@ const LoginCard = (props) => {
   };
 
   const handlePasswordInput = (event) => {
-    clearTimeout(form.password.timer);
     setValues({
       ...form,
       password: {
@@ -156,7 +150,6 @@ const LoginCard = (props) => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log(form.password.error);
     if (validForm()) {
       props.loginRequest(form.username.value);
       props.history.push('/home');
